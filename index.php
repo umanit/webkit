@@ -8,7 +8,8 @@
 
 // Programme de chargement de Twig
 require_once 'vendor/autoload.php';
-require_once 'DocumentedTemplate.php';
+
+use Umanit\Webkit\DocumentedTemplate;
 
 CONST PATH = 'templates';
 

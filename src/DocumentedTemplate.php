@@ -1,4 +1,5 @@
 <?php
+namespace Umanit\Webkit;
 
 /**
  * Class DocumentedTemplate
@@ -45,7 +46,6 @@ class DocumentedTemplate
 
     /**
      * Parse le template et set les propriétés de l'objet
-     * @todo AGU mettre en place le Property Accessor de Symfo
      * @todo TCA voir à retirer ça de la classe modèle
      */
     private function parseTemplate()
