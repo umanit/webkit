@@ -5,7 +5,8 @@
     "require": {
         "php": "^7.0",
         "symfony/webpack-encore-pack": "^1.0",
-        "twig/twig": "^2.4"
+        "twig/twig": "^2.4",
+        "symfony/property-access": "^3.4"
     },
     "license": "MIT",
     "authors": [

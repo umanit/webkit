@@ -48,7 +48,8 @@ if (isset($_GET['template'])) {
     }
 } else {
     // Récupération des templates
-    $files = DocumentedTemplate::parseDirectory(reset($loader->getPaths()));
+    $paths = $loader->getPaths();
+    $files = DocumentedTemplate::parseDirectory(reset($paths));
 
     // Création des DocumentTemplate
     $categories = [];

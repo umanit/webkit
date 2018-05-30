@@ -1,5 +1,9 @@
 <?php
+
 namespace Umanit\Webkit;
+
+use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
  * Class DocumentedTemplate
@@ -46,19 +50,30 @@ class DocumentedTemplate
 
     /**
      * Parse le template et set les propriétés de l'objet
+     *
      * @todo TCA voir à retirer ça de la classe modèle
      */
     private function parseTemplate()
     {
         $fileContent = file_get_contents($this->filePath);
-
+        $propAccess  = PropertyAccess::createPropertyAccessor();
         if (preg_match("/{#(.|\n)*#}/", $fileContent, $matches)) {
             if (preg_match_all("/@([A-Za-z\-]*): (.*)/", reset($matches), $commentStrings)) {
                 // Set des propriétés
                 foreach ($commentStrings[1] as $key => $property) {
                     $value = $commentStrings[2][$key];
-                    // @todo AGU Property Accessor
-                    $this->{'set'.ucfirst($property)}($value);
+                    try {
+                        $propAccess->setValue($this, $property, $value);
+                    } catch (NoSuchPropertyException $e) {
+                        throw new NoSuchAnnotationException(sprintf('L\'annotation "%s" n\'extste pas. Les annotations autorisées sont : %s', $key, implode(', ', [
+                            '@title',
+                            '@category',
+                            '@description',
+                            '@progressFront',
+                            '@progressBack',
+                            '@tags',
+                        ])));
+                    }
                 }
             }
         }
