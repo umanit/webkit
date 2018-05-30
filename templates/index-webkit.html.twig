@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>UmanIT Webkit | Templates</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
+          integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
+          crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <style>
+        ul {
+            margin-bottom: 0;
+            font-size: .8rem;
+        }
+    </style>
+</head>
+<body>
+<h1 class="text-center">Templates</h1>
+<div class="container">
+    {#<p>Accéder au <a href="../theme/adn-ouest/assets/build/styleguide/index.html">guide de style</a>.</p>#}
+
+    <div class="wrapper">
+        {% for category_name, category in categories %}
+
+            <h2>{{ category_name ? category_name|capitalize : 'Non catégorisé' }}</h2>
+
+            <table class="table">
+                {% for template in category %}
+                    <tr>
+                        <td width="40%">
+                            <a href="{{ template.uri }}">{{ template.title ? template.title : 'Template sans nom ('~ template.uri~')' }}</a>
+                            <p>
+                                {% for tag in template.tags %}
+                                    <small class="badge badge-warning">{{ tag|upper }}</small>
+                                {% endfor %}
+                            </p>
+                            <p>
+                                <small>{{ template.description }}</small>
+                            </p>
+                        </td>
+                        <td width="30%">
+                            <div class="progress">
+                                <div class="progress-bar" style="width:{{ template.progressFront }};">{{ template.progressFront }}</div>
+                            </div>
+                        </td>
+                        <td width="30%">
+                            <div class="progress">
+                                <div class="progress-bar" style="width:{{ template.progressBack }};">{{ template.progressBack }}</div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Front</th>
+                        <th>Back</th>
+                    </tr>
+                </thead>
+            </table>
+        {% endfor %}
+    </div>
+
+</div>
+
+</body>
+</html>

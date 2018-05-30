@@ -1,0 +1,17 @@
+{
+    "name": "umanit/static-webkit",
+    "description": "Starter kit for static website",
+    "type": "project",
+    "require": {
+        "symfony/webpack-encore-pack": "^1.0",
+        "twig/twig": "^2.4"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tristan Caron",
+            "email": "tcaron@umanit.fr"
+        }
+    ],
+    "minimum-stability": "dev"
+}
