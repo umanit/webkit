@@ -43,6 +43,11 @@ class DocumentedTemplate
         $this->parseTemplate();
     }
 
+    /**
+     * Parse le template et set les propriétés de l'objet
+     * @todo AGU mettre en place le Property Accessor de Symfo
+     * @todo TCA voir à retirer ça de la classe modèle
+     */
     private function parseTemplate()
     {
         $fileContent = file_get_contents($this->filePath);
@@ -51,7 +56,9 @@ class DocumentedTemplate
             if (preg_match_all("/@([A-Za-z\-]*): (.*)/", reset($matches), $commentStrings)) {
                 // Set des propriétés
                 foreach ($commentStrings[1] as $key => $property) {
-                    $this->{'set'.ucfirst($property)}($commentStrings[2][$key]);
+                    $value = $commentStrings[2][$key];
+                    // @todo AGU Property Accessor
+                    $this->{'set'.ucfirst($property)}($value);
                 }
             }
         }
