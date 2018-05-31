@@ -3,8 +3,10 @@
     "description": "Starter kit for static website",
     "type": "project",
     "require": {
+        "php": "^7.0",
         "symfony/webpack-encore-pack": "^1.0",
-        "twig/twig": "^2.4"
+        "twig/twig": "^2.4",
+        "symfony/property-access": "^3.4"
     },
     "license": "MIT",
     "authors": [
@@ -13,5 +15,10 @@
             "email": "tcaron@umanit.fr"
         }
     ],
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Umanit\\Webkit\\": "src/"
+        }
+    }
 }

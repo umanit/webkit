@@ -8,7 +8,8 @@
 
 // Programme de chargement de Twig
 require_once 'vendor/autoload.php';
-require_once 'DocumentedTemplate.php';
+
+use Umanit\Webkit\DocumentedTemplate;
 
 CONST PATH = 'templates';
 
@@ -47,7 +48,8 @@ if (isset($_GET['template'])) {
     }
 } else {
     // Récupération des templates
-    $files = DocumentedTemplate::parseDirectory(reset($loader->getPaths()));
+    $paths = $loader->getPaths();
+    $files = DocumentedTemplate::parseDirectory(reset($paths));
 
     // Création des DocumentTemplate
     $categories = [];
