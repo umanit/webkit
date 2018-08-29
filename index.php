@@ -33,6 +33,11 @@ $twig->addFunction(new \Twig_SimpleFunction('asset', function ($asset) use ($ass
     return sprintf('/theme/adn-ouest/%s?v'.$assetVersion, ltrim($asset, '/'));
 }));
 
+// Simulation de la fonction 'trans' de Symfony
+$twig->addFilter(new \Twig_SimpleFilter('trans', function($str){
+    return $str;
+}));
+
 // Pour accéder à un template, remplir le paramètre t dans l'URL par le nom du template (sans extension) voulu.
 if (isset($_GET['template'])) {
     $templateName = $_GET['template'];
