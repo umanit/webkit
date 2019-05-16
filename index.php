@@ -13,7 +13,7 @@ use Umanit\Webkit\DocumentedTemplate;
 
 CONST PATH = 'templates';
 
-$loader = new Twig_Loader_Filesystem(PATH);
+$loader = new Twig_Loader_Filesystem([PATH, 'src/views']);
 $twig   = new Twig_Environment($loader, [
     'auto_reload' => true,
     'debug'       => true,
@@ -26,51 +26,63 @@ $assetVersions = [
 ];
 
 // Simulation de la fonction `asset()` de Bolt
-$twig->addFunction(new \Twig_SimpleFunction('asset', function ($asset) use ($assetVersions) {
-    $assetName    = explode('.', $asset);
-    $assetVersion = $assetVersions[end($assetName)];
-
-    return sprintf('/theme/adn-ouest/%s?v'.$assetVersion, ltrim($asset, '/'));
+$twig->addFunction(new \Twig_SimpleFunction('asset', function ($asset) {
+    return sprintf('/%s', ltrim($asset, '/'));
 }));
 
 // Simulation de la fonction 'trans' de Symfony
-$twig->addFilter(new \Twig_SimpleFilter('trans', function($str){
+$twig->addFilter(new \Twig_SimpleFilter('trans', function ($str) {
     return $str;
 }));
 
-// Pour accéder à un template, remplir le paramètre t dans l'URL par le nom du template (sans extension) voulu.
-if (isset($_GET['template'])) {
-    $templateName = $_GET['template'];
-    $directory    = $_GET['directory'] ?? '';
+// Basic routing if a route is provided
+$path = explode('/', trim(parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH), '/'));
+if ($path[0] !== '') {
+    $templateName = array_pop($path);
+
+    $directory = '';
+    foreach ($path as $dir) {
+        $directory .= $dir.'/';
+    }
 
     try {
         print $twig->render($directory.'/'.$templateName.'.html.twig');
     } catch (Twig_Error_Loader $e) {
         print $twig->render('404.html.twig', [
-            'error_text' => 'Le template <code>'.$templateName.'</code> n\'existe pas.</br>
-		     Stacktrace : </br><code>'.$e.'</code>',
+            'error_text' => sprintf(
+                "<code>%s</code> template does not exist.</br> Stacktrace: </br><code>%s</code>",
+                $templateName,
+                $e
+            ),
         ]);
     }
-} else {
-    // Récupération des templates
+} else { // Display template listing if no route is provided
     $paths = $loader->getPaths();
+
     $files = DocumentedTemplate::parseDirectory(reset($paths));
 
-    // Création des DocumentTemplate
+    // DocumentTemplate creation
     $categories = [];
     foreach ($files as $filePath) {
-        $template = new DocumentedTemplate($filePath);
-        $uri = str_replace(
-            '.html.twig',
-            '',
-            str_replace(__DIR__.'/'.PATH, '', $filePath)
-        );
+        $arrayPath = explode('/', trim($filePath, '/'));
+        $prefix = substr(array_pop($arrayPath), 0, 1);
+        $extension = substr($filePath, -4, 4);
+        $isBaseTemplate = strstr($filePath, 'base') !== false;
+        // Ignore files starting with "_", base template and not a twig files
+        if ( $prefix !== '_' && $extension === 'twig' && !$isBaseTemplate) {
+            $template = new DocumentedTemplate($filePath);
+            $uri      = str_replace(
+                '.html.twig',
+                '',
+                str_replace(__DIR__.'/'.PATH, '', $filePath)
+            );
 
-        $template->setUri($uri);
-        $categories[strtolower($template->category)][] = $template;
+            $template->setUri($uri);
+            $categories[ucfirst($template->category)][] = $template;
+        }
     }
 
-    print $twig->render('index-webkit.html.twig', [ 'categories' => $categories]);
+    print $twig->render('index-webkit.html.twig', ['categories' => $categories]);
 }
 
 

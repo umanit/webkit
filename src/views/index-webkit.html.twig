@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
           integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
           crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <style>
         ul {
             margin-bottom: 0;
@@ -19,18 +18,16 @@
 <body>
 <h1 class="text-center">Templates</h1>
 <div class="container">
-    {#<p>Accéder au <a href="../theme/adn-ouest/assets/build/styleguide/index.html">guide de style</a>.</p>#}
-
     <div class="wrapper">
         {% for category_name, category in categories %}
 
-            <h2>{{ category_name ? category_name|capitalize : 'Non catégorisé' }}</h2>
+            <h2>{{ category_name ? category_name|trim|capitalize : 'Uncategorized' }}</h2>
 
             <table class="table">
                 {% for template in category %}
                     <tr>
                         <td width="40%">
-                            <a href="{{ template.uri }}">{{ template.title ? template.title : 'Template sans nom ('~ template.uri~')' }}</a>
+                            <a href="{{ template.uri }}">{{ template.title ? template.title : 'Unnamed template ('~ template.uri~')' }}</a>
                             <p>
                                 {% for tag in template.tags %}
                                     <small class="badge badge-warning">{{ tag|upper }}</small>

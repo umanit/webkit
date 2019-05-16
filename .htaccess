@@ -1,5 +1,0 @@
-RewriteEngine On
-RewriteCond  %{REQUEST_URI}  !index
-RewriteRule ^([^\/]+)$ index.php?template=$1 [L]
-RewriteRule ^([^\/]+)\/$ index.php?template=$1 [L]
-RewriteRule ^([^\/]+)\/([^\/]+)$ index.php?directory=$1&template=$2 [L]

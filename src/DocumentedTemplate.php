@@ -57,8 +57,8 @@ class DocumentedTemplate
     {
         $fileContent = file_get_contents($this->filePath);
         $propAccess  = PropertyAccess::createPropertyAccessor();
-        if (preg_match("/{#(.|\n)*#}/", $fileContent, $matches)) {
-            if (preg_match_all("/@([A-Za-z\-]*): (.*)/", reset($matches), $commentStrings)) {
+        if (preg_match("/^{#.*?#}/s", $fileContent, $matches)) {
+            if (preg_match_all("/@([A-Za-z\-]*):(.*)/", reset($matches), $commentStrings)) {
                 // Set des propriétés
                 foreach ($commentStrings[1] as $key => $property) {
                     $value = $commentStrings[2][$key];
