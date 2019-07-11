@@ -20,10 +20,6 @@ TODO à venir : Mise en forme du guide de style en lui-même
 Que le projet soit Symfony ou non , suivre la procédure :
 [https://symfony.com/doc/current/frontend/encore/installation.html](https://symfony.com/doc/current/frontend/encore/installation.html)
 
-### Installer les dépendances
-Dans terminal, dans le projet :
-```docker-compose exec node yarn install```
-
 ### Création du dossier assets
 A la racine du projet, créer le dossier ```assets``` à reprendre de ```umanit/css-starterkit``` sur Github.
 
@@ -226,6 +222,9 @@ module.exports = {
   }
 }
 ```
+### Installer les dépendances
+Dans terminal, dans le projet :
+```docker-compose exec node yarn install```
 
 ## Ajouter fichier .editorconfig
 A placer à la racine du site
