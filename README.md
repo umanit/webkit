@@ -112,6 +112,8 @@ module.exports = Encore.getWebpackConfig();
 app.style_guide:
     path: /style-guide/{template}
     controller: App\Controller\StyleGuideController
+    requirements:
+        template: .+
  ```
 * Dans le terminal, dans le projet :
 ``` docker-compose exec php bin/console make:controller ```
@@ -232,7 +234,7 @@ root = true
 
 [*]
 indent_style = space
-indent_size = 2
+indent_size = 4
 end_of_line = lf
 charset = utf-8
 trim_trailing_whitespace = true
