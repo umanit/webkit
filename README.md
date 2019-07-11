@@ -20,7 +20,7 @@ TODO à venir : Mise en forme du guide de style en lui-même
 Que le projet soit Symfony ou non , suivre la procédure :
 [https://symfony.com/doc/current/frontend/encore/installation.html](https://symfony.com/doc/current/frontend/encore/installation.html)
 
-### Installer yarn
+### Installer les dépendances
 Dans terminal, dans le projet :
 ```docker-compose exec node yarn install```
 
