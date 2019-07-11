@@ -28,7 +28,6 @@ A la racine du projet, créer le dossier ```assets``` à reprendre de ```umanit/
 // webpack.config.js
 const Encore = require('@symfony/webpack-encore');
 let path = require('path');
-// let styleguide = require('ruby-hologram-webpack-plugin');
 let glob = require('glob');
 
 /* *********************************************************************************************************************
