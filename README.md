@@ -206,9 +206,32 @@ La ligne répétée à chacun de ses appels dans le ``` index.html.twig```.
 ```
 ## Réglages supplémentaires
 
-### Installer Bootstrap 4 :
-```docker-composer up node yarn add bootstrap@4.3.1```
-Dans ```projet/scss/style.scss``` , penser à activer/désactiver/ajouter les lignes selon les besoins.
+### Créer le package.json :
+```
+{
+    "devDependencies": {
+        "@symfony/webpack-encore": "^0.27.0",
+        "core-js": "^3.0.0",
+        "node-sass": "^4.12.0",
+        "postcss-loader": "^3.0.0",
+        "sass-loader": "^7.0.1",
+        "webpack-notifier": "^1.6.0"
+    },
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress"
+    },
+    "dependencies": {
+        "autoprefixer": "^9.6.1",
+        "bootstrap": "4.3.1"
+    }
+}
+
+```
 
 ### Fichier postcss.config.js
 En raison de la présence de ```.enablePostCssLoader()``` dans le fichier ```webpack.config.js``` il nous faut ajouter le fichier ```postcss.config.js``` à la racine du projet.
@@ -226,6 +249,9 @@ module.exports = {
 ### Installer les dépendances
 Dans terminal, dans le projet :
 ```docker-compose exec node yarn install```
+
+### Bootstrap
+Dans ```projet/scss/style.scss``` , penser à activer/désactiver/ajouter les lignes selon les besoins.
 
 ## Ajouter fichier .editorconfig
 A placer à la racine du site
