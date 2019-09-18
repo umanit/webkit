@@ -1,5 +1,6 @@
 <?php
 
+use Twig\Extension\DebugExtension;
 use Umanit\Webkit\DocumentedTemplate;
 
 CONST PATH = 'templates';
@@ -9,6 +10,8 @@ $twig   = new Twig_Environment($loader, [
     'auto_reload' => true,
     'debug'       => true,
 ]);
+
+$twig->addExtension(new DebugExtension());
 
 // Cache buster pour l'intégration statique basé sur le checksum des css/js générés
 $assetVersions = [
