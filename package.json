@@ -11,7 +11,7 @@
         "popper.js": "^1.14.2",
         "compass-mixins": "Igosuki/compass-mixins",
         "copy-webpack-plugin": "^4.1.1",
-        "jquery": "^3.2.1",
+        "jquery": "^3.5.0",
         "node-sass": "^4.5.3",
         "path": "^0.12.7",
         "sass-loader": "^6.0.6"
