@@ -12,7 +12,7 @@
         "compass-mixins": "Igosuki/compass-mixins",
         "copy-webpack-plugin": "^4.1.1",
         "jquery": "^3.2.1",
-        "node-sass": "^4.5.3",
+        "node-sass": "^4.13.1",
         "path": "^0.12.7",
         "sass-loader": "^6.0.6"
     }
