@@ -7,7 +7,7 @@
     "license": "ISC",
     "dependencies": {
         "@symfony/webpack-encore": "^0.15.1",
-        "bootstrap": "^4.0.0",
+        "bootstrap": "^4.3.1",
         "popper.js": "^1.14.2",
         "compass-mixins": "Igosuki/compass-mixins",
         "copy-webpack-plugin": "^4.1.1",
